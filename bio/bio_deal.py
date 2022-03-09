@@ -18,8 +18,9 @@ def doccano_to_bio(file_path):
             for label in labels:
                 begin = label[0]
                 end = label[1]
-                labels_order[label[0]] = fillSpace(label[2].ljust(end - begin, label[2])) if end - begin > 1 else label[
-                    2]
+                # 非O开头的都用空格隔开
+                labels_order[label[0]] = fillSpace(label[2].ljust(end - begin, label[2])) \
+                    if list(label[2])[0] != 'O' else label[2]
             bio = ''
             for key in sorted(labels_order.keys()):
                 bio = bio + labels_order[key] + ' '
