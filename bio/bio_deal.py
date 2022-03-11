@@ -29,7 +29,6 @@ def doccano_to_bio(file_path):
 
 
 def write_bios(sink_path):
-    global key, value
     with open(sink_path, 'w', encoding='utf-8') as fp:
         for key, value in bios.items():
             content = key + ' ' + value
@@ -40,9 +39,9 @@ def write_bios(sink_path):
 
 if __name__ == '__main__':
     # 需要处理的json文件
-    file_path = 'all.json'
+    source_path = 'all.json'
     sink_path = 'bios1.txt'
-    bios = doccano_to_bio(file_path)
+    bios = doccano_to_bio(source_path)
     write_bios(sink_path)
     for key, value in bios.items():
         print(key, value)
