@@ -110,7 +110,7 @@
 低速噪音还是可以接受的，反正比之前的油车好太多啦，这个价位咱也不能要求太多是吧！	B-Aspect I-Aspect I-Aspect I-Aspect O O O O B-Opinion I-Opinion O O O O O O O O O O O O O O O O O O O O O O O O O O O O O O
 全家出游时：一家人出行，也不觉得挤，空间够大，而且坐的很舒服，我最喜欢坐后排，腿部空间无敌啦！	O O O O O O O O O O O O O O O O O O B-Aspect I-Aspect O B-Opinion O O O O O O O O O O O O O O O O O O O O O O O O O
 乘坐前排头部空间很好，座椅还可以高低调节，大部分身高的人都没问题，后排就更没问题啦！	O O O O O O B-Aspect I-Aspect B-Opinion I-Opinion O O O O O O O O O O O O O O O O O O O O O O O O O O O O O O O O
-储物后背箱不算很大，不过也够用，拉大一点的东西，可以把第二排放倒，空间就完全没有问题.	B-Aspect I-Aspect I-Aspect B-Opinion I-Opinion
+储物后背箱不算很大，不过也够用，拉大一点的东西，可以把第二排放倒，空间就完全没有问题.	O O B-Aspect I-Aspect I-Aspect O O O O O O O O B-Opinion I-Opinion O O O O O O O O O O O O O O O O O O O O O O O O O O O O
 动力随叫随到，也不用疼油钱啦，不像油车还有顿挫，加速非常平顺，开过电车，怎么也回不到油车啦！	O O O O O O O O O O O O O O O O O O O O O O O O B-Aspect I-Aspect O O B-Opinion I-Opinion O O O O O O O O O O O O O O O O
 动力平顺性：加速比较平顺，动力比较强，停车自动加电子手刹，起步直接踩油门，非常方便，开起来一点也不累	O O O O O O B-Aspect I-Aspect O O B-Opinion I-Opinion O B-Aspect I-Aspect O O B-Opinion O O O O O O O O O O O O O O O O O O O O O O O O O O O O O O O O
 操控还可以，底盘有点硬，不过还是有韧性，是我喜欢的感觉.高速有点发飘，高速跑的少，可以忽略不计啦，方向盘有3种助力模式，想轻就轻，想重就重，合创非常考虑客户的需求，这一点给个赞?	B-Aspect I-Aspect O B-Opinion I-Opinion O B-Aspect I-Aspect O O B-Opinion O O O O O O O O O O O O O O O O O O O O O O O O O O O O O O O O O O O O O O O O O O O O O O O O O O O O O O O O O O O O O O O O O O O O O O O O O O O O O O
