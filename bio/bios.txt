@@ -1,1 +1,0 @@
-加速非常满意，	B-Aspect I-Aspect O O B-Opinion I-Opinion O最不满意的是它的底盘，	B-Aspect I-Aspect I-Aspect I-Aspect O O O O B-Opinion I-Opinion O最不满意的就是车内的塑料件太多了，	B-Aspect I-Aspect I-Aspect I-Aspect O O O O O O B-Opinion I-Opinion O O O O O车内的噪音就比较明显了，	O O O B-Aspect I-Aspect O O O B-Opinion I-Opinion O O
