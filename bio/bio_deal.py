@@ -62,7 +62,7 @@ def write_bios(sink_path):
 '''
 if __name__ == '__main__':
     file_path = 'all.json'
-    sink_path = 'bios1.txt'
+    sink_path = 'bios.txt'
     bios = doccano_to_bio(file_path)
     write_bios(sink_path)
     for key, value in bios.items():
