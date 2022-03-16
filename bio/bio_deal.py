@@ -22,6 +22,8 @@ def doccano_to_bio(file_path):
         for str in fp.readlines():
             json_data = json.loads(str)
             labels = json_data['label']
+            if len(labels) == 0:
+                continue
             labels_order = {}
             for label in labels:
                 begin = label[0]
