@@ -43,7 +43,6 @@ def doccano_to_bio(file_path):
 
 
 def write_bios(sink_path):
-    global key, value
     with open(sink_path, 'w', encoding='utf-8') as fp:
         for key, value in bios.items():
             content = key + '\t' + value
