@@ -1,0 +1,1222 @@
+
+    private static DataStream<JSONObject> patternBMS_BattTempMax(DataStream<SingleRuleEntiy> ds) {
+        Pattern<SingleRuleEntiy, SingleRuleEntiy> pattern = Pattern.<SingleRuleEntiy>begin(EnterpriseEnum.BMS_BattTempMax.name() + "_begin")
+                .where(new SimpleCondition<SingleRuleEntiy>() {
+                    @Override
+                    public boolean filter(SingleRuleEntiy SingleRuleEntiy) {
+                     String value = SingleRuleEntiy.getBMS_BattTempMax();
+                        if (StringUtils.isBlank(value)) {
+                            return false;
+                        }
+                        BigDecimal lower = EnterpriseEnum.BMS_BattTempMax.getLowerThreshold();
+                        BigDecimal upper = EnterpriseEnum.BMS_BattTempMax.getUpperThreshold();
+                        return MathUtils.isNotBetween(BigDecimal.valueOf(Double.parseDouble(value)), lower, upper);
+                    }
+                });
+
+        PatternStream<SingleRuleEntiy> patternStream = CEP
+                .pattern(ds.keyBy(SingleRuleEntiy::getVin), pattern);
+
+        DataStream<JSONObject> dataStream = patternStream.select(new PatternSelectFunction<SingleRuleEntiy, JSONObject>() {
+            @Override
+            public JSONObject select(Map<String, List<SingleRuleEntiy>> pattern) {
+                List<SingleRuleEntiy> seconds = pattern.get(EnterpriseEnum.BMS_BattTempMax.name() + "_begin");
+                JSONObject jsonObject = new JSONObject();
+                SingleRuleEntiy data = seconds.get(0);
+                jsonObject.put("vin", data.getVin());
+                jsonObject.put("message_time", data.getSampleTime());
+                jsonObject.put("target", data.getBMS_BattTempMax());
+                jsonObject.put("code", EnterpriseEnum.BMS_BattTempMax.getCode());
+                jsonObject.put("car_model", G_05);
+                jsonObject.put("loaction_latitude", Dms2dUtils.changeToDu(data.getTEL_LatitudeDeg(),data.getTEL_LatitudeMin(),data.getTEL_LatitudeSec()));
+                jsonObject.put("loaction_Longitude", Dms2dUtils.changeToDu(data.getTEL_LongitudeDeg(),data.getTEL_LongitudeMin(),data.getTEL_LongitudeSec()));
+                return jsonObject;
+            }
+        });
+        return dataStream;
+    }
+
+    private static DataStream<JSONObject> patternBMS_BattTempMin(DataStream<SingleRuleEntiy> ds) {
+        Pattern<SingleRuleEntiy, SingleRuleEntiy> pattern = Pattern.<SingleRuleEntiy>begin(EnterpriseEnum.BMS_BattTempMin.name() + "_begin")
+                .where(new SimpleCondition<SingleRuleEntiy>() {
+                    @Override
+                    public boolean filter(SingleRuleEntiy SingleRuleEntiy) {
+                     String value = SingleRuleEntiy.getBMS_BattTempMin();
+                        if (StringUtils.isBlank(value)) {
+                            return false;
+                        }
+                        BigDecimal lower = EnterpriseEnum.BMS_BattTempMin.getLowerThreshold();
+                        BigDecimal upper = EnterpriseEnum.BMS_BattTempMin.getUpperThreshold();
+                        return MathUtils.isNotBetween(BigDecimal.valueOf(Double.parseDouble(value)), lower, upper);
+                    }
+                });
+
+        PatternStream<SingleRuleEntiy> patternStream = CEP
+                .pattern(ds.keyBy(SingleRuleEntiy::getVin), pattern);
+
+        DataStream<JSONObject> dataStream = patternStream.select(new PatternSelectFunction<SingleRuleEntiy, JSONObject>() {
+            @Override
+            public JSONObject select(Map<String, List<SingleRuleEntiy>> pattern) {
+                List<SingleRuleEntiy> seconds = pattern.get(EnterpriseEnum.BMS_BattTempMin.name() + "_begin");
+                JSONObject jsonObject = new JSONObject();
+                SingleRuleEntiy data = seconds.get(0);
+                jsonObject.put("vin", data.getVin());
+                jsonObject.put("message_time", data.getSampleTime());
+                jsonObject.put("target", data.getBMS_BattTempMax());
+                jsonObject.put("code", EnterpriseEnum.BMS_BattTempMax.getCode());
+                jsonObject.put("car_model", G_05);
+                jsonObject.put("loaction_latitude", Dms2dUtils.changeToDu(data.getTEL_LatitudeDeg(),data.getTEL_LatitudeMin(),data.getTEL_LatitudeSec()));
+                jsonObject.put("loaction_Longitude", Dms2dUtils.changeToDu(data.getTEL_LongitudeDeg(),data.getTEL_LongitudeMin(),data.getTEL_LongitudeSec()));
+                return jsonObject;
+            }
+        });
+        return dataStream;
+    }
+
+    private static DataStream<JSONObject> patternBMS_BattVolt(DataStream<SingleRuleEntiy> ds) {
+        Pattern<SingleRuleEntiy, SingleRuleEntiy> pattern = Pattern.<SingleRuleEntiy>begin(EnterpriseEnum.BMS_BattVolt.name() + "_begin")
+                .where(new SimpleCondition<SingleRuleEntiy>() {
+                    @Override
+                    public boolean filter(SingleRuleEntiy SingleRuleEntiy) {
+                     String value = SingleRuleEntiy.getBMS_BattVolt();
+                        if (StringUtils.isBlank(value)) {
+                            return false;
+                        }
+                        BigDecimal lower = EnterpriseEnum.BMS_BattVolt.getLowerThreshold();
+                        BigDecimal upper = EnterpriseEnum.BMS_BattVolt.getUpperThreshold();
+                        return MathUtils.isNotBetween(BigDecimal.valueOf(Double.parseDouble(value)), lower, upper);
+                    }
+                });
+
+        PatternStream<SingleRuleEntiy> patternStream = CEP
+                .pattern(ds.keyBy(SingleRuleEntiy::getVin), pattern);
+
+        DataStream<JSONObject> dataStream = patternStream.select(new PatternSelectFunction<SingleRuleEntiy, JSONObject>() {
+            @Override
+            public JSONObject select(Map<String, List<SingleRuleEntiy>> pattern) {
+                List<SingleRuleEntiy> seconds = pattern.get(EnterpriseEnum.BMS_BattVolt.name() + "_begin");
+                JSONObject jsonObject = new JSONObject();
+                SingleRuleEntiy data = seconds.get(0);
+                jsonObject.put("vin", data.getVin());
+                jsonObject.put("message_time", data.getSampleTime());
+                jsonObject.put("target", data.getBMS_BattTempMax());
+                jsonObject.put("code", EnterpriseEnum.BMS_BattTempMax.getCode());
+                jsonObject.put("car_model", G_05);
+                jsonObject.put("loaction_latitude", Dms2dUtils.changeToDu(data.getTEL_LatitudeDeg(),data.getTEL_LatitudeMin(),data.getTEL_LatitudeSec()));
+                jsonObject.put("loaction_Longitude", Dms2dUtils.changeToDu(data.getTEL_LongitudeDeg(),data.getTEL_LongitudeMin(),data.getTEL_LongitudeSec()));
+                return jsonObject;
+            }
+        });
+        return dataStream;
+    }
+
+    private static DataStream<JSONObject> patternBMS_CellVoltSumBD(DataStream<SingleRuleEntiy> ds) {
+        Pattern<SingleRuleEntiy, SingleRuleEntiy> pattern = Pattern.<SingleRuleEntiy>begin(EnterpriseEnum.BMS_CellVoltSumBD.name() + "_begin")
+                .where(new SimpleCondition<SingleRuleEntiy>() {
+                    @Override
+                    public boolean filter(SingleRuleEntiy SingleRuleEntiy) {
+                     String value = SingleRuleEntiy.getBMS_CellVoltSumBD();
+                        if (StringUtils.isBlank(value)) {
+                            return false;
+                        }
+                        BigDecimal lower = EnterpriseEnum.BMS_CellVoltSumBD.getLowerThreshold();
+                        BigDecimal upper = EnterpriseEnum.BMS_CellVoltSumBD.getUpperThreshold();
+                        return MathUtils.isNotBetween(BigDecimal.valueOf(Double.parseDouble(value)), lower, upper);
+                    }
+                });
+
+        PatternStream<SingleRuleEntiy> patternStream = CEP
+                .pattern(ds.keyBy(SingleRuleEntiy::getVin), pattern);
+
+        DataStream<JSONObject> dataStream = patternStream.select(new PatternSelectFunction<SingleRuleEntiy, JSONObject>() {
+            @Override
+            public JSONObject select(Map<String, List<SingleRuleEntiy>> pattern) {
+                List<SingleRuleEntiy> seconds = pattern.get(EnterpriseEnum.BMS_CellVoltSumBD.name() + "_begin");
+                JSONObject jsonObject = new JSONObject();
+                SingleRuleEntiy data = seconds.get(0);
+                jsonObject.put("vin", data.getVin());
+                jsonObject.put("message_time", data.getSampleTime());
+                jsonObject.put("target", data.getBMS_BattTempMax());
+                jsonObject.put("code", EnterpriseEnum.BMS_BattTempMax.getCode());
+                jsonObject.put("car_model", G_05);
+                jsonObject.put("loaction_latitude", Dms2dUtils.changeToDu(data.getTEL_LatitudeDeg(),data.getTEL_LatitudeMin(),data.getTEL_LatitudeSec()));
+                jsonObject.put("loaction_Longitude", Dms2dUtils.changeToDu(data.getTEL_LongitudeDeg(),data.getTEL_LongitudeMin(),data.getTEL_LongitudeSec()));
+                return jsonObject;
+            }
+        });
+        return dataStream;
+    }
+
+    private static DataStream<JSONObject> patternBMS_ChgCurrMax_Contns(DataStream<SingleRuleEntiy> ds) {
+        Pattern<SingleRuleEntiy, SingleRuleEntiy> pattern = Pattern.<SingleRuleEntiy>begin(EnterpriseEnum.BMS_ChgCurrMax_Contns.name() + "_begin")
+                .where(new SimpleCondition<SingleRuleEntiy>() {
+                    @Override
+                    public boolean filter(SingleRuleEntiy SingleRuleEntiy) {
+                     String value = SingleRuleEntiy.getBMS_ChgCurrMax_Contns();
+                        if (StringUtils.isBlank(value)) {
+                            return false;
+                        }
+                        BigDecimal lower = EnterpriseEnum.BMS_ChgCurrMax_Contns.getLowerThreshold();
+                        BigDecimal upper = EnterpriseEnum.BMS_ChgCurrMax_Contns.getUpperThreshold();
+                        return MathUtils.isNotBetween(BigDecimal.valueOf(Double.parseDouble(value)), lower, upper);
+                    }
+                });
+
+        PatternStream<SingleRuleEntiy> patternStream = CEP
+                .pattern(ds.keyBy(SingleRuleEntiy::getVin), pattern);
+
+        DataStream<JSONObject> dataStream = patternStream.select(new PatternSelectFunction<SingleRuleEntiy, JSONObject>() {
+            @Override
+            public JSONObject select(Map<String, List<SingleRuleEntiy>> pattern) {
+                List<SingleRuleEntiy> seconds = pattern.get(EnterpriseEnum.BMS_ChgCurrMax_Contns.name() + "_begin");
+                JSONObject jsonObject = new JSONObject();
+                SingleRuleEntiy data = seconds.get(0);
+                jsonObject.put("vin", data.getVin());
+                jsonObject.put("message_time", data.getSampleTime());
+                jsonObject.put("target", data.getBMS_BattTempMax());
+                jsonObject.put("code", EnterpriseEnum.BMS_BattTempMax.getCode());
+                jsonObject.put("car_model", G_05);
+                jsonObject.put("loaction_latitude", Dms2dUtils.changeToDu(data.getTEL_LatitudeDeg(),data.getTEL_LatitudeMin(),data.getTEL_LatitudeSec()));
+                jsonObject.put("loaction_Longitude", Dms2dUtils.changeToDu(data.getTEL_LongitudeDeg(),data.getTEL_LongitudeMin(),data.getTEL_LongitudeSec()));
+                return jsonObject;
+            }
+        });
+        return dataStream;
+    }
+
+    private static DataStream<JSONObject> patternBMS_ChgCurrMax_Peak(DataStream<SingleRuleEntiy> ds) {
+        Pattern<SingleRuleEntiy, SingleRuleEntiy> pattern = Pattern.<SingleRuleEntiy>begin(EnterpriseEnum.BMS_ChgCurrMax_Peak.name() + "_begin")
+                .where(new SimpleCondition<SingleRuleEntiy>() {
+                    @Override
+                    public boolean filter(SingleRuleEntiy SingleRuleEntiy) {
+                     String value = SingleRuleEntiy.getBMS_ChgCurrMax_Peak();
+                        if (StringUtils.isBlank(value)) {
+                            return false;
+                        }
+                        BigDecimal lower = EnterpriseEnum.BMS_ChgCurrMax_Peak.getLowerThreshold();
+                        BigDecimal upper = EnterpriseEnum.BMS_ChgCurrMax_Peak.getUpperThreshold();
+                        return MathUtils.isNotBetween(BigDecimal.valueOf(Double.parseDouble(value)), lower, upper);
+                    }
+                });
+
+        PatternStream<SingleRuleEntiy> patternStream = CEP
+                .pattern(ds.keyBy(SingleRuleEntiy::getVin), pattern);
+
+        DataStream<JSONObject> dataStream = patternStream.select(new PatternSelectFunction<SingleRuleEntiy, JSONObject>() {
+            @Override
+            public JSONObject select(Map<String, List<SingleRuleEntiy>> pattern) {
+                List<SingleRuleEntiy> seconds = pattern.get(EnterpriseEnum.BMS_ChgCurrMax_Peak.name() + "_begin");
+                JSONObject jsonObject = new JSONObject();
+                SingleRuleEntiy data = seconds.get(0);
+                jsonObject.put("vin", data.getVin());
+                jsonObject.put("message_time", data.getSampleTime());
+                jsonObject.put("target", data.getBMS_BattTempMax());
+                jsonObject.put("code", EnterpriseEnum.BMS_BattTempMax.getCode());
+                jsonObject.put("car_model", G_05);
+                jsonObject.put("loaction_latitude", Dms2dUtils.changeToDu(data.getTEL_LatitudeDeg(),data.getTEL_LatitudeMin(),data.getTEL_LatitudeSec()));
+                jsonObject.put("loaction_Longitude", Dms2dUtils.changeToDu(data.getTEL_LongitudeDeg(),data.getTEL_LongitudeMin(),data.getTEL_LongitudeSec()));
+                return jsonObject;
+            }
+        });
+        return dataStream;
+    }
+
+    private static DataStream<JSONObject> patternBMS_DcChgCurrMax(DataStream<SingleRuleEntiy> ds) {
+        Pattern<SingleRuleEntiy, SingleRuleEntiy> pattern = Pattern.<SingleRuleEntiy>begin(EnterpriseEnum.BMS_DcChgCurrMax.name() + "_begin")
+                .where(new SimpleCondition<SingleRuleEntiy>() {
+                    @Override
+                    public boolean filter(SingleRuleEntiy SingleRuleEntiy) {
+                     String value = SingleRuleEntiy.getBMS_DcChgCurrMax();
+                        if (StringUtils.isBlank(value)) {
+                            return false;
+                        }
+                        BigDecimal lower = EnterpriseEnum.BMS_DcChgCurrMax.getLowerThreshold();
+                        BigDecimal upper = EnterpriseEnum.BMS_DcChgCurrMax.getUpperThreshold();
+                        return MathUtils.isNotBetween(BigDecimal.valueOf(Double.parseDouble(value)), lower, upper);
+                    }
+                });
+
+        PatternStream<SingleRuleEntiy> patternStream = CEP
+                .pattern(ds.keyBy(SingleRuleEntiy::getVin), pattern);
+
+        DataStream<JSONObject> dataStream = patternStream.select(new PatternSelectFunction<SingleRuleEntiy, JSONObject>() {
+            @Override
+            public JSONObject select(Map<String, List<SingleRuleEntiy>> pattern) {
+                List<SingleRuleEntiy> seconds = pattern.get(EnterpriseEnum.BMS_DcChgCurrMax.name() + "_begin");
+                JSONObject jsonObject = new JSONObject();
+                SingleRuleEntiy data = seconds.get(0);
+                jsonObject.put("vin", data.getVin());
+                jsonObject.put("message_time", data.getSampleTime());
+                jsonObject.put("target", data.getBMS_BattTempMax());
+                jsonObject.put("code", EnterpriseEnum.BMS_BattTempMax.getCode());
+                jsonObject.put("car_model", G_05);
+                jsonObject.put("loaction_latitude", Dms2dUtils.changeToDu(data.getTEL_LatitudeDeg(),data.getTEL_LatitudeMin(),data.getTEL_LatitudeSec()));
+                jsonObject.put("loaction_Longitude", Dms2dUtils.changeToDu(data.getTEL_LongitudeDeg(),data.getTEL_LongitudeMin(),data.getTEL_LongitudeSec()));
+                return jsonObject;
+            }
+        });
+        return dataStream;
+    }
+
+    private static DataStream<JSONObject> patternBMS_DchgCurrMax_Contns(DataStream<SingleRuleEntiy> ds) {
+        Pattern<SingleRuleEntiy, SingleRuleEntiy> pattern = Pattern.<SingleRuleEntiy>begin(EnterpriseEnum.BMS_DchgCurrMax_Contns.name() + "_begin")
+                .where(new SimpleCondition<SingleRuleEntiy>() {
+                    @Override
+                    public boolean filter(SingleRuleEntiy SingleRuleEntiy) {
+                     String value = SingleRuleEntiy.getBMS_DchgCurrMax_Contns();
+                        if (StringUtils.isBlank(value)) {
+                            return false;
+                        }
+                        BigDecimal lower = EnterpriseEnum.BMS_DchgCurrMax_Contns.getLowerThreshold();
+                        BigDecimal upper = EnterpriseEnum.BMS_DchgCurrMax_Contns.getUpperThreshold();
+                        return MathUtils.isNotBetween(BigDecimal.valueOf(Double.parseDouble(value)), lower, upper);
+                    }
+                });
+
+        PatternStream<SingleRuleEntiy> patternStream = CEP
+                .pattern(ds.keyBy(SingleRuleEntiy::getVin), pattern);
+
+        DataStream<JSONObject> dataStream = patternStream.select(new PatternSelectFunction<SingleRuleEntiy, JSONObject>() {
+            @Override
+            public JSONObject select(Map<String, List<SingleRuleEntiy>> pattern) {
+                List<SingleRuleEntiy> seconds = pattern.get(EnterpriseEnum.BMS_DchgCurrMax_Contns.name() + "_begin");
+                JSONObject jsonObject = new JSONObject();
+                SingleRuleEntiy data = seconds.get(0);
+                jsonObject.put("vin", data.getVin());
+                jsonObject.put("message_time", data.getSampleTime());
+                jsonObject.put("target", data.getBMS_BattTempMax());
+                jsonObject.put("code", EnterpriseEnum.BMS_BattTempMax.getCode());
+                jsonObject.put("car_model", G_05);
+                jsonObject.put("loaction_latitude", Dms2dUtils.changeToDu(data.getTEL_LatitudeDeg(),data.getTEL_LatitudeMin(),data.getTEL_LatitudeSec()));
+                jsonObject.put("loaction_Longitude", Dms2dUtils.changeToDu(data.getTEL_LongitudeDeg(),data.getTEL_LongitudeMin(),data.getTEL_LongitudeSec()));
+                return jsonObject;
+            }
+        });
+        return dataStream;
+    }
+
+    private static DataStream<JSONObject> patternBMS_DchgCurrMax_Peak(DataStream<SingleRuleEntiy> ds) {
+        Pattern<SingleRuleEntiy, SingleRuleEntiy> pattern = Pattern.<SingleRuleEntiy>begin(EnterpriseEnum.BMS_DchgCurrMax_Peak.name() + "_begin")
+                .where(new SimpleCondition<SingleRuleEntiy>() {
+                    @Override
+                    public boolean filter(SingleRuleEntiy SingleRuleEntiy) {
+                     String value = SingleRuleEntiy.getBMS_DchgCurrMax_Peak();
+                        if (StringUtils.isBlank(value)) {
+                            return false;
+                        }
+                        BigDecimal lower = EnterpriseEnum.BMS_DchgCurrMax_Peak.getLowerThreshold();
+                        BigDecimal upper = EnterpriseEnum.BMS_DchgCurrMax_Peak.getUpperThreshold();
+                        return MathUtils.isNotBetween(BigDecimal.valueOf(Double.parseDouble(value)), lower, upper);
+                    }
+                });
+
+        PatternStream<SingleRuleEntiy> patternStream = CEP
+                .pattern(ds.keyBy(SingleRuleEntiy::getVin), pattern);
+
+        DataStream<JSONObject> dataStream = patternStream.select(new PatternSelectFunction<SingleRuleEntiy, JSONObject>() {
+            @Override
+            public JSONObject select(Map<String, List<SingleRuleEntiy>> pattern) {
+                List<SingleRuleEntiy> seconds = pattern.get(EnterpriseEnum.BMS_DchgCurrMax_Peak.name() + "_begin");
+                JSONObject jsonObject = new JSONObject();
+                SingleRuleEntiy data = seconds.get(0);
+                jsonObject.put("vin", data.getVin());
+                jsonObject.put("message_time", data.getSampleTime());
+                jsonObject.put("target", data.getBMS_BattTempMax());
+                jsonObject.put("code", EnterpriseEnum.BMS_BattTempMax.getCode());
+                jsonObject.put("car_model", G_05);
+                jsonObject.put("loaction_latitude", Dms2dUtils.changeToDu(data.getTEL_LatitudeDeg(),data.getTEL_LatitudeMin(),data.getTEL_LatitudeSec()));
+                jsonObject.put("loaction_Longitude", Dms2dUtils.changeToDu(data.getTEL_LongitudeDeg(),data.getTEL_LongitudeMin(),data.getTEL_LongitudeSec()));
+                return jsonObject;
+            }
+        });
+        return dataStream;
+    }
+
+    private static DataStream<JSONObject> patternDCU_InvtTemp(DataStream<SingleRuleEntiy> ds) {
+        Pattern<SingleRuleEntiy, SingleRuleEntiy> pattern = Pattern.<SingleRuleEntiy>begin(EnterpriseEnum.DCU_InvtTemp.name() + "_begin")
+                .where(new SimpleCondition<SingleRuleEntiy>() {
+                    @Override
+                    public boolean filter(SingleRuleEntiy SingleRuleEntiy) {
+                     String value = SingleRuleEntiy.getDCU_InvtTemp();
+                        if (StringUtils.isBlank(value)) {
+                            return false;
+                        }
+                        BigDecimal lower = EnterpriseEnum.DCU_InvtTemp.getLowerThreshold();
+                        BigDecimal upper = EnterpriseEnum.DCU_InvtTemp.getUpperThreshold();
+                        return MathUtils.isNotBetween(BigDecimal.valueOf(Double.parseDouble(value)), lower, upper);
+                    }
+                });
+
+        PatternStream<SingleRuleEntiy> patternStream = CEP
+                .pattern(ds.keyBy(SingleRuleEntiy::getVin), pattern);
+
+        DataStream<JSONObject> dataStream = patternStream.select(new PatternSelectFunction<SingleRuleEntiy, JSONObject>() {
+            @Override
+            public JSONObject select(Map<String, List<SingleRuleEntiy>> pattern) {
+                List<SingleRuleEntiy> seconds = pattern.get(EnterpriseEnum.DCU_InvtTemp.name() + "_begin");
+                JSONObject jsonObject = new JSONObject();
+                SingleRuleEntiy data = seconds.get(0);
+                jsonObject.put("vin", data.getVin());
+                jsonObject.put("message_time", data.getSampleTime());
+                jsonObject.put("target", data.getBMS_BattTempMax());
+                jsonObject.put("code", EnterpriseEnum.BMS_BattTempMax.getCode());
+                jsonObject.put("car_model", G_05);
+                jsonObject.put("loaction_latitude", Dms2dUtils.changeToDu(data.getTEL_LatitudeDeg(),data.getTEL_LatitudeMin(),data.getTEL_LatitudeSec()));
+                jsonObject.put("loaction_Longitude", Dms2dUtils.changeToDu(data.getTEL_LongitudeDeg(),data.getTEL_LongitudeMin(),data.getTEL_LongitudeSec()));
+                return jsonObject;
+            }
+        });
+        return dataStream;
+    }
+
+    private static DataStream<JSONObject> patternDCU_RotTemp(DataStream<SingleRuleEntiy> ds) {
+        Pattern<SingleRuleEntiy, SingleRuleEntiy> pattern = Pattern.<SingleRuleEntiy>begin(EnterpriseEnum.DCU_RotTemp.name() + "_begin")
+                .where(new SimpleCondition<SingleRuleEntiy>() {
+                    @Override
+                    public boolean filter(SingleRuleEntiy SingleRuleEntiy) {
+                     String value = SingleRuleEntiy.getDCU_RotTemp();
+                        if (StringUtils.isBlank(value)) {
+                            return false;
+                        }
+                        BigDecimal lower = EnterpriseEnum.DCU_RotTemp.getLowerThreshold();
+                        BigDecimal upper = EnterpriseEnum.DCU_RotTemp.getUpperThreshold();
+                        return MathUtils.isNotBetween(BigDecimal.valueOf(Double.parseDouble(value)), lower, upper);
+                    }
+                });
+
+        PatternStream<SingleRuleEntiy> patternStream = CEP
+                .pattern(ds.keyBy(SingleRuleEntiy::getVin), pattern);
+
+        DataStream<JSONObject> dataStream = patternStream.select(new PatternSelectFunction<SingleRuleEntiy, JSONObject>() {
+            @Override
+            public JSONObject select(Map<String, List<SingleRuleEntiy>> pattern) {
+                List<SingleRuleEntiy> seconds = pattern.get(EnterpriseEnum.DCU_RotTemp.name() + "_begin");
+                JSONObject jsonObject = new JSONObject();
+                SingleRuleEntiy data = seconds.get(0);
+                jsonObject.put("vin", data.getVin());
+                jsonObject.put("message_time", data.getSampleTime());
+                jsonObject.put("target", data.getBMS_BattTempMax());
+                jsonObject.put("code", EnterpriseEnum.BMS_BattTempMax.getCode());
+                jsonObject.put("car_model", G_05);
+                jsonObject.put("loaction_latitude", Dms2dUtils.changeToDu(data.getTEL_LatitudeDeg(),data.getTEL_LatitudeMin(),data.getTEL_LatitudeSec()));
+                jsonObject.put("loaction_Longitude", Dms2dUtils.changeToDu(data.getTEL_LongitudeDeg(),data.getTEL_LongitudeMin(),data.getTEL_LongitudeSec()));
+                return jsonObject;
+            }
+        });
+        return dataStream;
+    }
+
+    private static DataStream<JSONObject> patternDCU_StatTemp(DataStream<SingleRuleEntiy> ds) {
+        Pattern<SingleRuleEntiy, SingleRuleEntiy> pattern = Pattern.<SingleRuleEntiy>begin(EnterpriseEnum.DCU_StatTemp.name() + "_begin")
+                .where(new SimpleCondition<SingleRuleEntiy>() {
+                    @Override
+                    public boolean filter(SingleRuleEntiy SingleRuleEntiy) {
+                     String value = SingleRuleEntiy.getDCU_StatTemp();
+                        if (StringUtils.isBlank(value)) {
+                            return false;
+                        }
+                        BigDecimal lower = EnterpriseEnum.DCU_StatTemp.getLowerThreshold();
+                        BigDecimal upper = EnterpriseEnum.DCU_StatTemp.getUpperThreshold();
+                        return MathUtils.isNotBetween(BigDecimal.valueOf(Double.parseDouble(value)), lower, upper);
+                    }
+                });
+
+        PatternStream<SingleRuleEntiy> patternStream = CEP
+                .pattern(ds.keyBy(SingleRuleEntiy::getVin), pattern);
+
+        DataStream<JSONObject> dataStream = patternStream.select(new PatternSelectFunction<SingleRuleEntiy, JSONObject>() {
+            @Override
+            public JSONObject select(Map<String, List<SingleRuleEntiy>> pattern) {
+                List<SingleRuleEntiy> seconds = pattern.get(EnterpriseEnum.DCU_StatTemp.name() + "_begin");
+                JSONObject jsonObject = new JSONObject();
+                SingleRuleEntiy data = seconds.get(0);
+                jsonObject.put("vin", data.getVin());
+                jsonObject.put("message_time", data.getSampleTime());
+                jsonObject.put("target", data.getBMS_BattTempMax());
+                jsonObject.put("code", EnterpriseEnum.BMS_BattTempMax.getCode());
+                jsonObject.put("car_model", G_05);
+                jsonObject.put("loaction_latitude", Dms2dUtils.changeToDu(data.getTEL_LatitudeDeg(),data.getTEL_LatitudeMin(),data.getTEL_LatitudeSec()));
+                jsonObject.put("loaction_Longitude", Dms2dUtils.changeToDu(data.getTEL_LongitudeDeg(),data.getTEL_LongitudeMin(),data.getTEL_LongitudeSec()));
+                return jsonObject;
+            }
+        });
+        return dataStream;
+    }
+
+    private static DataStream<JSONObject> patternDCU_TempCoolant(DataStream<SingleRuleEntiy> ds) {
+        Pattern<SingleRuleEntiy, SingleRuleEntiy> pattern = Pattern.<SingleRuleEntiy>begin(EnterpriseEnum.DCU_TempCoolant.name() + "_begin")
+                .where(new SimpleCondition<SingleRuleEntiy>() {
+                    @Override
+                    public boolean filter(SingleRuleEntiy SingleRuleEntiy) {
+                     String value = SingleRuleEntiy.getDCU_TempCoolant();
+                        if (StringUtils.isBlank(value)) {
+                            return false;
+                        }
+                        BigDecimal lower = EnterpriseEnum.DCU_TempCoolant.getLowerThreshold();
+                        BigDecimal upper = EnterpriseEnum.DCU_TempCoolant.getUpperThreshold();
+                        return MathUtils.isNotBetween(BigDecimal.valueOf(Double.parseDouble(value)), lower, upper);
+                    }
+                });
+
+        PatternStream<SingleRuleEntiy> patternStream = CEP
+                .pattern(ds.keyBy(SingleRuleEntiy::getVin), pattern);
+
+        DataStream<JSONObject> dataStream = patternStream.select(new PatternSelectFunction<SingleRuleEntiy, JSONObject>() {
+            @Override
+            public JSONObject select(Map<String, List<SingleRuleEntiy>> pattern) {
+                List<SingleRuleEntiy> seconds = pattern.get(EnterpriseEnum.DCU_TempCoolant.name() + "_begin");
+                JSONObject jsonObject = new JSONObject();
+                SingleRuleEntiy data = seconds.get(0);
+                jsonObject.put("vin", data.getVin());
+                jsonObject.put("message_time", data.getSampleTime());
+                jsonObject.put("target", data.getBMS_BattTempMax());
+                jsonObject.put("code", EnterpriseEnum.BMS_BattTempMax.getCode());
+                jsonObject.put("car_model", G_05);
+                jsonObject.put("loaction_latitude", Dms2dUtils.changeToDu(data.getTEL_LatitudeDeg(),data.getTEL_LatitudeMin(),data.getTEL_LatitudeSec()));
+                jsonObject.put("loaction_Longitude", Dms2dUtils.changeToDu(data.getTEL_LongitudeDeg(),data.getTEL_LongitudeMin(),data.getTEL_LongitudeSec()));
+                return jsonObject;
+            }
+        });
+        return dataStream;
+    }
+
+    private static DataStream<JSONObject> patternDCU_TorqAct(DataStream<SingleRuleEntiy> ds) {
+        Pattern<SingleRuleEntiy, SingleRuleEntiy> pattern = Pattern.<SingleRuleEntiy>begin(EnterpriseEnum.DCU_TorqAct.name() + "_begin")
+                .where(new SimpleCondition<SingleRuleEntiy>() {
+                    @Override
+                    public boolean filter(SingleRuleEntiy SingleRuleEntiy) {
+                     String value = SingleRuleEntiy.getDCU_TorqAct();
+                        if (StringUtils.isBlank(value)) {
+                            return false;
+                        }
+                        BigDecimal lower = EnterpriseEnum.DCU_TorqAct.getLowerThreshold();
+                        BigDecimal upper = EnterpriseEnum.DCU_TorqAct.getUpperThreshold();
+                        return MathUtils.isNotBetween(BigDecimal.valueOf(Double.parseDouble(value)), lower, upper);
+                    }
+                });
+
+        PatternStream<SingleRuleEntiy> patternStream = CEP
+                .pattern(ds.keyBy(SingleRuleEntiy::getVin), pattern);
+
+        DataStream<JSONObject> dataStream = patternStream.select(new PatternSelectFunction<SingleRuleEntiy, JSONObject>() {
+            @Override
+            public JSONObject select(Map<String, List<SingleRuleEntiy>> pattern) {
+                List<SingleRuleEntiy> seconds = pattern.get(EnterpriseEnum.DCU_TorqAct.name() + "_begin");
+                JSONObject jsonObject = new JSONObject();
+                SingleRuleEntiy data = seconds.get(0);
+                jsonObject.put("vin", data.getVin());
+                jsonObject.put("message_time", data.getSampleTime());
+                jsonObject.put("target", data.getBMS_BattTempMax());
+                jsonObject.put("code", EnterpriseEnum.BMS_BattTempMax.getCode());
+                jsonObject.put("car_model", G_05);
+                jsonObject.put("loaction_latitude", Dms2dUtils.changeToDu(data.getTEL_LatitudeDeg(),data.getTEL_LatitudeMin(),data.getTEL_LatitudeSec()));
+                jsonObject.put("loaction_Longitude", Dms2dUtils.changeToDu(data.getTEL_LongitudeDeg(),data.getTEL_LongitudeMin(),data.getTEL_LongitudeSec()));
+                return jsonObject;
+            }
+        });
+        return dataStream;
+    }
+
+    private static DataStream<JSONObject> patternEPS_StrngWhlTorq(DataStream<SingleRuleEntiy> ds) {
+        Pattern<SingleRuleEntiy, SingleRuleEntiy> pattern = Pattern.<SingleRuleEntiy>begin(EnterpriseEnum.EPS_StrngWhlTorq.name() + "_begin")
+                .where(new SimpleCondition<SingleRuleEntiy>() {
+                    @Override
+                    public boolean filter(SingleRuleEntiy SingleRuleEntiy) {
+                     String value = SingleRuleEntiy.getEPS_StrngWhlTorq();
+                        if (StringUtils.isBlank(value)) {
+                            return false;
+                        }
+                        BigDecimal lower = EnterpriseEnum.EPS_StrngWhlTorq.getLowerThreshold();
+                        BigDecimal upper = EnterpriseEnum.EPS_StrngWhlTorq.getUpperThreshold();
+                        return MathUtils.isNotBetween(BigDecimal.valueOf(Double.parseDouble(value)), lower, upper);
+                    }
+                });
+
+        PatternStream<SingleRuleEntiy> patternStream = CEP
+                .pattern(ds.keyBy(SingleRuleEntiy::getVin), pattern);
+
+        DataStream<JSONObject> dataStream = patternStream.select(new PatternSelectFunction<SingleRuleEntiy, JSONObject>() {
+            @Override
+            public JSONObject select(Map<String, List<SingleRuleEntiy>> pattern) {
+                List<SingleRuleEntiy> seconds = pattern.get(EnterpriseEnum.EPS_StrngWhlTorq.name() + "_begin");
+                JSONObject jsonObject = new JSONObject();
+                SingleRuleEntiy data = seconds.get(0);
+                jsonObject.put("vin", data.getVin());
+                jsonObject.put("message_time", data.getSampleTime());
+                jsonObject.put("target", data.getBMS_BattTempMax());
+                jsonObject.put("code", EnterpriseEnum.BMS_BattTempMax.getCode());
+                jsonObject.put("car_model", G_05);
+                jsonObject.put("loaction_latitude", Dms2dUtils.changeToDu(data.getTEL_LatitudeDeg(),data.getTEL_LatitudeMin(),data.getTEL_LatitudeSec()));
+                jsonObject.put("loaction_Longitude", Dms2dUtils.changeToDu(data.getTEL_LongitudeDeg(),data.getTEL_LongitudeMin(),data.getTEL_LongitudeSec()));
+                return jsonObject;
+            }
+        });
+        return dataStream;
+    }
+
+    private static DataStream<JSONObject> patternHVAC_RawCabinTemp(DataStream<SingleRuleEntiy> ds) {
+        Pattern<SingleRuleEntiy, SingleRuleEntiy> pattern = Pattern.<SingleRuleEntiy>begin(EnterpriseEnum.HVAC_RawCabinTemp.name() + "_begin")
+                .where(new SimpleCondition<SingleRuleEntiy>() {
+                    @Override
+                    public boolean filter(SingleRuleEntiy SingleRuleEntiy) {
+                     String value = SingleRuleEntiy.getHVAC_RawCabinTemp();
+                        if (StringUtils.isBlank(value)) {
+                            return false;
+                        }
+                        BigDecimal lower = EnterpriseEnum.HVAC_RawCabinTemp.getLowerThreshold();
+                        BigDecimal upper = EnterpriseEnum.HVAC_RawCabinTemp.getUpperThreshold();
+                        return MathUtils.isNotBetween(BigDecimal.valueOf(Double.parseDouble(value)), lower, upper);
+                    }
+                });
+
+        PatternStream<SingleRuleEntiy> patternStream = CEP
+                .pattern(ds.keyBy(SingleRuleEntiy::getVin), pattern);
+
+        DataStream<JSONObject> dataStream = patternStream.select(new PatternSelectFunction<SingleRuleEntiy, JSONObject>() {
+            @Override
+            public JSONObject select(Map<String, List<SingleRuleEntiy>> pattern) {
+                List<SingleRuleEntiy> seconds = pattern.get(EnterpriseEnum.HVAC_RawCabinTemp.name() + "_begin");
+                JSONObject jsonObject = new JSONObject();
+                SingleRuleEntiy data = seconds.get(0);
+                jsonObject.put("vin", data.getVin());
+                jsonObject.put("message_time", data.getSampleTime());
+                jsonObject.put("target", data.getBMS_BattTempMax());
+                jsonObject.put("code", EnterpriseEnum.BMS_BattTempMax.getCode());
+                jsonObject.put("car_model", G_05);
+                jsonObject.put("loaction_latitude", Dms2dUtils.changeToDu(data.getTEL_LatitudeDeg(),data.getTEL_LatitudeMin(),data.getTEL_LatitudeSec()));
+                jsonObject.put("loaction_Longitude", Dms2dUtils.changeToDu(data.getTEL_LongitudeDeg(),data.getTEL_LongitudeMin(),data.getTEL_LongitudeSec()));
+                return jsonObject;
+            }
+        });
+        return dataStream;
+    }
+
+    private static DataStream<JSONObject> patternHVAC_RawEvaTemp(DataStream<SingleRuleEntiy> ds) {
+        Pattern<SingleRuleEntiy, SingleRuleEntiy> pattern = Pattern.<SingleRuleEntiy>begin(EnterpriseEnum.HVAC_RawEvaTemp.name() + "_begin")
+                .where(new SimpleCondition<SingleRuleEntiy>() {
+                    @Override
+                    public boolean filter(SingleRuleEntiy SingleRuleEntiy) {
+                     String value = SingleRuleEntiy.getHVAC_RawEvaTemp();
+                        if (StringUtils.isBlank(value)) {
+                            return false;
+                        }
+                        BigDecimal lower = EnterpriseEnum.HVAC_RawEvaTemp.getLowerThreshold();
+                        BigDecimal upper = EnterpriseEnum.HVAC_RawEvaTemp.getUpperThreshold();
+                        return MathUtils.isNotBetween(BigDecimal.valueOf(Double.parseDouble(value)), lower, upper);
+                    }
+                });
+
+        PatternStream<SingleRuleEntiy> patternStream = CEP
+                .pattern(ds.keyBy(SingleRuleEntiy::getVin), pattern);
+
+        DataStream<JSONObject> dataStream = patternStream.select(new PatternSelectFunction<SingleRuleEntiy, JSONObject>() {
+            @Override
+            public JSONObject select(Map<String, List<SingleRuleEntiy>> pattern) {
+                List<SingleRuleEntiy> seconds = pattern.get(EnterpriseEnum.HVAC_RawEvaTemp.name() + "_begin");
+                JSONObject jsonObject = new JSONObject();
+                SingleRuleEntiy data = seconds.get(0);
+                jsonObject.put("vin", data.getVin());
+                jsonObject.put("message_time", data.getSampleTime());
+                jsonObject.put("target", data.getBMS_BattTempMax());
+                jsonObject.put("code", EnterpriseEnum.BMS_BattTempMax.getCode());
+                jsonObject.put("car_model", G_05);
+                jsonObject.put("loaction_latitude", Dms2dUtils.changeToDu(data.getTEL_LatitudeDeg(),data.getTEL_LatitudeMin(),data.getTEL_LatitudeSec()));
+                jsonObject.put("loaction_Longitude", Dms2dUtils.changeToDu(data.getTEL_LongitudeDeg(),data.getTEL_LongitudeMin(),data.getTEL_LongitudeSec()));
+                return jsonObject;
+            }
+        });
+        return dataStream;
+    }
+
+    private static DataStream<JSONObject> patternHVAC_RawExterTemp(DataStream<SingleRuleEntiy> ds) {
+        Pattern<SingleRuleEntiy, SingleRuleEntiy> pattern = Pattern.<SingleRuleEntiy>begin(EnterpriseEnum.HVAC_RawExterTemp.name() + "_begin")
+                .where(new SimpleCondition<SingleRuleEntiy>() {
+                    @Override
+                    public boolean filter(SingleRuleEntiy SingleRuleEntiy) {
+                     String value = SingleRuleEntiy.getHVAC_RawExterTemp();
+                        if (StringUtils.isBlank(value)) {
+                            return false;
+                        }
+                        BigDecimal lower = EnterpriseEnum.HVAC_RawExterTemp.getLowerThreshold();
+                        BigDecimal upper = EnterpriseEnum.HVAC_RawExterTemp.getUpperThreshold();
+                        return MathUtils.isNotBetween(BigDecimal.valueOf(Double.parseDouble(value)), lower, upper);
+                    }
+                });
+
+        PatternStream<SingleRuleEntiy> patternStream = CEP
+                .pattern(ds.keyBy(SingleRuleEntiy::getVin), pattern);
+
+        DataStream<JSONObject> dataStream = patternStream.select(new PatternSelectFunction<SingleRuleEntiy, JSONObject>() {
+            @Override
+            public JSONObject select(Map<String, List<SingleRuleEntiy>> pattern) {
+                List<SingleRuleEntiy> seconds = pattern.get(EnterpriseEnum.HVAC_RawExterTemp.name() + "_begin");
+                JSONObject jsonObject = new JSONObject();
+                SingleRuleEntiy data = seconds.get(0);
+                jsonObject.put("vin", data.getVin());
+                jsonObject.put("message_time", data.getSampleTime());
+                jsonObject.put("target", data.getBMS_BattTempMax());
+                jsonObject.put("code", EnterpriseEnum.BMS_BattTempMax.getCode());
+                jsonObject.put("car_model", G_05);
+                jsonObject.put("loaction_latitude", Dms2dUtils.changeToDu(data.getTEL_LatitudeDeg(),data.getTEL_LatitudeMin(),data.getTEL_LatitudeSec()));
+                jsonObject.put("loaction_Longitude", Dms2dUtils.changeToDu(data.getTEL_LongitudeDeg(),data.getTEL_LongitudeMin(),data.getTEL_LongitudeSec()));
+                return jsonObject;
+            }
+        });
+        return dataStream;
+    }
+
+    private static DataStream<JSONObject> patternIPS_DCDC_KL30Volt(DataStream<SingleRuleEntiy> ds) {
+        Pattern<SingleRuleEntiy, SingleRuleEntiy> pattern = Pattern.<SingleRuleEntiy>begin(EnterpriseEnum.IPS_DCDC_KL30Volt.name() + "_begin")
+                .where(new SimpleCondition<SingleRuleEntiy>() {
+                    @Override
+                    public boolean filter(SingleRuleEntiy SingleRuleEntiy) {
+                     String value = SingleRuleEntiy.getIPS_DCDC_KL30Volt();
+                        if (StringUtils.isBlank(value)) {
+                            return false;
+                        }
+                        BigDecimal lower = EnterpriseEnum.IPS_DCDC_KL30Volt.getLowerThreshold();
+                        BigDecimal upper = EnterpriseEnum.IPS_DCDC_KL30Volt.getUpperThreshold();
+                        return MathUtils.isNotBetween(BigDecimal.valueOf(Double.parseDouble(value)), lower, upper);
+                    }
+                });
+
+        PatternStream<SingleRuleEntiy> patternStream = CEP
+                .pattern(ds.keyBy(SingleRuleEntiy::getVin), pattern);
+
+        DataStream<JSONObject> dataStream = patternStream.select(new PatternSelectFunction<SingleRuleEntiy, JSONObject>() {
+            @Override
+            public JSONObject select(Map<String, List<SingleRuleEntiy>> pattern) {
+                List<SingleRuleEntiy> seconds = pattern.get(EnterpriseEnum.IPS_DCDC_KL30Volt.name() + "_begin");
+                JSONObject jsonObject = new JSONObject();
+                SingleRuleEntiy data = seconds.get(0);
+                jsonObject.put("vin", data.getVin());
+                jsonObject.put("message_time", data.getSampleTime());
+                jsonObject.put("target", data.getBMS_BattTempMax());
+                jsonObject.put("code", EnterpriseEnum.BMS_BattTempMax.getCode());
+                jsonObject.put("car_model", G_05);
+                jsonObject.put("loaction_latitude", Dms2dUtils.changeToDu(data.getTEL_LatitudeDeg(),data.getTEL_LatitudeMin(),data.getTEL_LatitudeSec()));
+                jsonObject.put("loaction_Longitude", Dms2dUtils.changeToDu(data.getTEL_LongitudeDeg(),data.getTEL_LongitudeMin(),data.getTEL_LongitudeSec()));
+                return jsonObject;
+            }
+        });
+        return dataStream;
+    }
+
+    private static DataStream<JSONObject> patternIPS_DCDCTempAct(DataStream<SingleRuleEntiy> ds) {
+        Pattern<SingleRuleEntiy, SingleRuleEntiy> pattern = Pattern.<SingleRuleEntiy>begin(EnterpriseEnum.IPS_DCDCTempAct.name() + "_begin")
+                .where(new SimpleCondition<SingleRuleEntiy>() {
+                    @Override
+                    public boolean filter(SingleRuleEntiy SingleRuleEntiy) {
+                     String value = SingleRuleEntiy.getIPS_DCDCTempAct();
+                        if (StringUtils.isBlank(value)) {
+                            return false;
+                        }
+                        BigDecimal lower = EnterpriseEnum.IPS_DCDCTempAct.getLowerThreshold();
+                        BigDecimal upper = EnterpriseEnum.IPS_DCDCTempAct.getUpperThreshold();
+                        return MathUtils.isNotBetween(BigDecimal.valueOf(Double.parseDouble(value)), lower, upper);
+                    }
+                });
+
+        PatternStream<SingleRuleEntiy> patternStream = CEP
+                .pattern(ds.keyBy(SingleRuleEntiy::getVin), pattern);
+
+        DataStream<JSONObject> dataStream = patternStream.select(new PatternSelectFunction<SingleRuleEntiy, JSONObject>() {
+            @Override
+            public JSONObject select(Map<String, List<SingleRuleEntiy>> pattern) {
+                List<SingleRuleEntiy> seconds = pattern.get(EnterpriseEnum.IPS_DCDCTempAct.name() + "_begin");
+                JSONObject jsonObject = new JSONObject();
+                SingleRuleEntiy data = seconds.get(0);
+                jsonObject.put("vin", data.getVin());
+                jsonObject.put("message_time", data.getSampleTime());
+                jsonObject.put("target", data.getBMS_BattTempMax());
+                jsonObject.put("code", EnterpriseEnum.BMS_BattTempMax.getCode());
+                jsonObject.put("car_model", G_05);
+                jsonObject.put("loaction_latitude", Dms2dUtils.changeToDu(data.getTEL_LatitudeDeg(),data.getTEL_LatitudeMin(),data.getTEL_LatitudeSec()));
+                jsonObject.put("loaction_Longitude", Dms2dUtils.changeToDu(data.getTEL_LongitudeDeg(),data.getTEL_LongitudeMin(),data.getTEL_LongitudeSec()));
+                return jsonObject;
+            }
+        });
+        return dataStream;
+    }
+
+    private static DataStream<JSONObject> patternIPS_DCDCVoltLvAct(DataStream<SingleRuleEntiy> ds) {
+        Pattern<SingleRuleEntiy, SingleRuleEntiy> pattern = Pattern.<SingleRuleEntiy>begin(EnterpriseEnum.IPS_DCDCVoltLvAct.name() + "_begin")
+                .where(new SimpleCondition<SingleRuleEntiy>() {
+                    @Override
+                    public boolean filter(SingleRuleEntiy SingleRuleEntiy) {
+                     String value = SingleRuleEntiy.getIPS_DCDCVoltLvAct();
+                        if (StringUtils.isBlank(value)) {
+                            return false;
+                        }
+                        BigDecimal lower = EnterpriseEnum.IPS_DCDCVoltLvAct.getLowerThreshold();
+                        BigDecimal upper = EnterpriseEnum.IPS_DCDCVoltLvAct.getUpperThreshold();
+                        return MathUtils.isNotBetween(BigDecimal.valueOf(Double.parseDouble(value)), lower, upper);
+                    }
+                });
+
+        PatternStream<SingleRuleEntiy> patternStream = CEP
+                .pattern(ds.keyBy(SingleRuleEntiy::getVin), pattern);
+
+        DataStream<JSONObject> dataStream = patternStream.select(new PatternSelectFunction<SingleRuleEntiy, JSONObject>() {
+            @Override
+            public JSONObject select(Map<String, List<SingleRuleEntiy>> pattern) {
+                List<SingleRuleEntiy> seconds = pattern.get(EnterpriseEnum.IPS_DCDCVoltLvAct.name() + "_begin");
+                JSONObject jsonObject = new JSONObject();
+                SingleRuleEntiy data = seconds.get(0);
+                jsonObject.put("vin", data.getVin());
+                jsonObject.put("message_time", data.getSampleTime());
+                jsonObject.put("target", data.getBMS_BattTempMax());
+                jsonObject.put("code", EnterpriseEnum.BMS_BattTempMax.getCode());
+                jsonObject.put("car_model", G_05);
+                jsonObject.put("loaction_latitude", Dms2dUtils.changeToDu(data.getTEL_LatitudeDeg(),data.getTEL_LatitudeMin(),data.getTEL_LatitudeSec()));
+                jsonObject.put("loaction_Longitude", Dms2dUtils.changeToDu(data.getTEL_LongitudeDeg(),data.getTEL_LongitudeMin(),data.getTEL_LongitudeSec()));
+                return jsonObject;
+            }
+        });
+        return dataStream;
+    }
+
+    private static DataStream<JSONObject> patternIPS_OBCTempAct(DataStream<SingleRuleEntiy> ds) {
+        Pattern<SingleRuleEntiy, SingleRuleEntiy> pattern = Pattern.<SingleRuleEntiy>begin(EnterpriseEnum.IPS_OBCTempAct.name() + "_begin")
+                .where(new SimpleCondition<SingleRuleEntiy>() {
+                    @Override
+                    public boolean filter(SingleRuleEntiy SingleRuleEntiy) {
+                     String value = SingleRuleEntiy.getIPS_OBCTempAct();
+                        if (StringUtils.isBlank(value)) {
+                            return false;
+                        }
+                        BigDecimal lower = EnterpriseEnum.IPS_OBCTempAct.getLowerThreshold();
+                        BigDecimal upper = EnterpriseEnum.IPS_OBCTempAct.getUpperThreshold();
+                        return MathUtils.isNotBetween(BigDecimal.valueOf(Double.parseDouble(value)), lower, upper);
+                    }
+                });
+
+        PatternStream<SingleRuleEntiy> patternStream = CEP
+                .pattern(ds.keyBy(SingleRuleEntiy::getVin), pattern);
+
+        DataStream<JSONObject> dataStream = patternStream.select(new PatternSelectFunction<SingleRuleEntiy, JSONObject>() {
+            @Override
+            public JSONObject select(Map<String, List<SingleRuleEntiy>> pattern) {
+                List<SingleRuleEntiy> seconds = pattern.get(EnterpriseEnum.IPS_OBCTempAct.name() + "_begin");
+                JSONObject jsonObject = new JSONObject();
+                SingleRuleEntiy data = seconds.get(0);
+                jsonObject.put("vin", data.getVin());
+                jsonObject.put("message_time", data.getSampleTime());
+                jsonObject.put("target", data.getBMS_BattTempMax());
+                jsonObject.put("code", EnterpriseEnum.BMS_BattTempMax.getCode());
+                jsonObject.put("car_model", G_05);
+                jsonObject.put("loaction_latitude", Dms2dUtils.changeToDu(data.getTEL_LatitudeDeg(),data.getTEL_LatitudeMin(),data.getTEL_LatitudeSec()));
+                jsonObject.put("loaction_Longitude", Dms2dUtils.changeToDu(data.getTEL_LongitudeDeg(),data.getTEL_LongitudeMin(),data.getTEL_LongitudeSec()));
+                return jsonObject;
+            }
+        });
+        return dataStream;
+    }
+
+    private static DataStream<JSONObject> patternVCU_aiTACChL1BD(DataStream<SingleRuleEntiy> ds) {
+        Pattern<SingleRuleEntiy, SingleRuleEntiy> pattern = Pattern.<SingleRuleEntiy>begin(EnterpriseEnum.VCU_aiTACChL1BD.name() + "_begin")
+                .where(new SimpleCondition<SingleRuleEntiy>() {
+                    @Override
+                    public boolean filter(SingleRuleEntiy SingleRuleEntiy) {
+                     String value = SingleRuleEntiy.getVCU_aiTACChL1BD();
+                        if (StringUtils.isBlank(value)) {
+                            return false;
+                        }
+                        BigDecimal lower = EnterpriseEnum.VCU_aiTACChL1BD.getLowerThreshold();
+                        BigDecimal upper = EnterpriseEnum.VCU_aiTACChL1BD.getUpperThreshold();
+                        return MathUtils.isNotBetween(BigDecimal.valueOf(Double.parseDouble(value)), lower, upper);
+                    }
+                });
+
+        PatternStream<SingleRuleEntiy> patternStream = CEP
+                .pattern(ds.keyBy(SingleRuleEntiy::getVin), pattern);
+
+        DataStream<JSONObject> dataStream = patternStream.select(new PatternSelectFunction<SingleRuleEntiy, JSONObject>() {
+            @Override
+            public JSONObject select(Map<String, List<SingleRuleEntiy>> pattern) {
+                List<SingleRuleEntiy> seconds = pattern.get(EnterpriseEnum.VCU_aiTACChL1BD.name() + "_begin");
+                JSONObject jsonObject = new JSONObject();
+                SingleRuleEntiy data = seconds.get(0);
+                jsonObject.put("vin", data.getVin());
+                jsonObject.put("message_time", data.getSampleTime());
+                jsonObject.put("target", data.getBMS_BattTempMax());
+                jsonObject.put("code", EnterpriseEnum.BMS_BattTempMax.getCode());
+                jsonObject.put("car_model", G_05);
+                jsonObject.put("loaction_latitude", Dms2dUtils.changeToDu(data.getTEL_LatitudeDeg(),data.getTEL_LatitudeMin(),data.getTEL_LatitudeSec()));
+                jsonObject.put("loaction_Longitude", Dms2dUtils.changeToDu(data.getTEL_LongitudeDeg(),data.getTEL_LongitudeMin(),data.getTEL_LongitudeSec()));
+                return jsonObject;
+            }
+        });
+        return dataStream;
+    }
+
+    private static DataStream<JSONObject> patternVCU_aiTACChNBD(DataStream<SingleRuleEntiy> ds) {
+        Pattern<SingleRuleEntiy, SingleRuleEntiy> pattern = Pattern.<SingleRuleEntiy>begin(EnterpriseEnum.VCU_aiTACChNBD.name() + "_begin")
+                .where(new SimpleCondition<SingleRuleEntiy>() {
+                    @Override
+                    public boolean filter(SingleRuleEntiy SingleRuleEntiy) {
+                     String value = SingleRuleEntiy.getVCU_aiTACChNBD();
+                        if (StringUtils.isBlank(value)) {
+                            return false;
+                        }
+                        BigDecimal lower = EnterpriseEnum.VCU_aiTACChNBD.getLowerThreshold();
+                        BigDecimal upper = EnterpriseEnum.VCU_aiTACChNBD.getUpperThreshold();
+                        return MathUtils.isNotBetween(BigDecimal.valueOf(Double.parseDouble(value)), lower, upper);
+                    }
+                });
+
+        PatternStream<SingleRuleEntiy> patternStream = CEP
+                .pattern(ds.keyBy(SingleRuleEntiy::getVin), pattern);
+
+        DataStream<JSONObject> dataStream = patternStream.select(new PatternSelectFunction<SingleRuleEntiy, JSONObject>() {
+            @Override
+            public JSONObject select(Map<String, List<SingleRuleEntiy>> pattern) {
+                List<SingleRuleEntiy> seconds = pattern.get(EnterpriseEnum.VCU_aiTACChNBD.name() + "_begin");
+                JSONObject jsonObject = new JSONObject();
+                SingleRuleEntiy data = seconds.get(0);
+                jsonObject.put("vin", data.getVin());
+                jsonObject.put("message_time", data.getSampleTime());
+                jsonObject.put("target", data.getBMS_BattTempMax());
+                jsonObject.put("code", EnterpriseEnum.BMS_BattTempMax.getCode());
+                jsonObject.put("car_model", G_05);
+                jsonObject.put("loaction_latitude", Dms2dUtils.changeToDu(data.getTEL_LatitudeDeg(),data.getTEL_LatitudeMin(),data.getTEL_LatitudeSec()));
+                jsonObject.put("loaction_Longitude", Dms2dUtils.changeToDu(data.getTEL_LongitudeDeg(),data.getTEL_LongitudeMin(),data.getTEL_LongitudeSec()));
+                return jsonObject;
+            }
+        });
+        return dataStream;
+    }
+
+    private static DataStream<JSONObject> patternVCU_aiTAmbBD(DataStream<SingleRuleEntiy> ds) {
+        Pattern<SingleRuleEntiy, SingleRuleEntiy> pattern = Pattern.<SingleRuleEntiy>begin(EnterpriseEnum.VCU_aiTAmbBD.name() + "_begin")
+                .where(new SimpleCondition<SingleRuleEntiy>() {
+                    @Override
+                    public boolean filter(SingleRuleEntiy SingleRuleEntiy) {
+                     String value = SingleRuleEntiy.getVCU_aiTAmbBD();
+                        if (StringUtils.isBlank(value)) {
+                            return false;
+                        }
+                        BigDecimal lower = EnterpriseEnum.VCU_aiTAmbBD.getLowerThreshold();
+                        BigDecimal upper = EnterpriseEnum.VCU_aiTAmbBD.getUpperThreshold();
+                        return MathUtils.isNotBetween(BigDecimal.valueOf(Double.parseDouble(value)), lower, upper);
+                    }
+                });
+
+        PatternStream<SingleRuleEntiy> patternStream = CEP
+                .pattern(ds.keyBy(SingleRuleEntiy::getVin), pattern);
+
+        DataStream<JSONObject> dataStream = patternStream.select(new PatternSelectFunction<SingleRuleEntiy, JSONObject>() {
+            @Override
+            public JSONObject select(Map<String, List<SingleRuleEntiy>> pattern) {
+                List<SingleRuleEntiy> seconds = pattern.get(EnterpriseEnum.VCU_aiTAmbBD.name() + "_begin");
+                JSONObject jsonObject = new JSONObject();
+                SingleRuleEntiy data = seconds.get(0);
+                jsonObject.put("vin", data.getVin());
+                jsonObject.put("message_time", data.getSampleTime());
+                jsonObject.put("target", data.getBMS_BattTempMax());
+                jsonObject.put("code", EnterpriseEnum.BMS_BattTempMax.getCode());
+                jsonObject.put("car_model", G_05);
+                jsonObject.put("loaction_latitude", Dms2dUtils.changeToDu(data.getTEL_LatitudeDeg(),data.getTEL_LatitudeMin(),data.getTEL_LatitudeSec()));
+                jsonObject.put("loaction_Longitude", Dms2dUtils.changeToDu(data.getTEL_LongitudeDeg(),data.getTEL_LongitudeMin(),data.getTEL_LongitudeSec()));
+                return jsonObject;
+            }
+        });
+        return dataStream;
+    }
+
+    private static DataStream<JSONObject> patternVCU_aiTDCChNegBD(DataStream<SingleRuleEntiy> ds) {
+        Pattern<SingleRuleEntiy, SingleRuleEntiy> pattern = Pattern.<SingleRuleEntiy>begin(EnterpriseEnum.VCU_aiTDCChNegBD.name() + "_begin")
+                .where(new SimpleCondition<SingleRuleEntiy>() {
+                    @Override
+                    public boolean filter(SingleRuleEntiy SingleRuleEntiy) {
+                     String value = SingleRuleEntiy.getVCU_aiTDCChNegBD();
+                        if (StringUtils.isBlank(value)) {
+                            return false;
+                        }
+                        BigDecimal lower = EnterpriseEnum.VCU_aiTDCChNegBD.getLowerThreshold();
+                        BigDecimal upper = EnterpriseEnum.VCU_aiTDCChNegBD.getUpperThreshold();
+                        return MathUtils.isNotBetween(BigDecimal.valueOf(Double.parseDouble(value)), lower, upper);
+                    }
+                });
+
+        PatternStream<SingleRuleEntiy> patternStream = CEP
+                .pattern(ds.keyBy(SingleRuleEntiy::getVin), pattern);
+
+        DataStream<JSONObject> dataStream = patternStream.select(new PatternSelectFunction<SingleRuleEntiy, JSONObject>() {
+            @Override
+            public JSONObject select(Map<String, List<SingleRuleEntiy>> pattern) {
+                List<SingleRuleEntiy> seconds = pattern.get(EnterpriseEnum.VCU_aiTDCChNegBD.name() + "_begin");
+                JSONObject jsonObject = new JSONObject();
+                SingleRuleEntiy data = seconds.get(0);
+                jsonObject.put("vin", data.getVin());
+                jsonObject.put("message_time", data.getSampleTime());
+                jsonObject.put("target", data.getBMS_BattTempMax());
+                jsonObject.put("code", EnterpriseEnum.BMS_BattTempMax.getCode());
+                jsonObject.put("car_model", G_05);
+                jsonObject.put("loaction_latitude", Dms2dUtils.changeToDu(data.getTEL_LatitudeDeg(),data.getTEL_LatitudeMin(),data.getTEL_LatitudeSec()));
+                jsonObject.put("loaction_Longitude", Dms2dUtils.changeToDu(data.getTEL_LongitudeDeg(),data.getTEL_LongitudeMin(),data.getTEL_LongitudeSec()));
+                return jsonObject;
+            }
+        });
+        return dataStream;
+    }
+
+    private static DataStream<JSONObject> patternVCU_aiTDCChPosBD(DataStream<SingleRuleEntiy> ds) {
+        Pattern<SingleRuleEntiy, SingleRuleEntiy> pattern = Pattern.<SingleRuleEntiy>begin(EnterpriseEnum.VCU_aiTDCChPosBD.name() + "_begin")
+                .where(new SimpleCondition<SingleRuleEntiy>() {
+                    @Override
+                    public boolean filter(SingleRuleEntiy SingleRuleEntiy) {
+                     String value = SingleRuleEntiy.getVCU_aiTDCChPosBD();
+                        if (StringUtils.isBlank(value)) {
+                            return false;
+                        }
+                        BigDecimal lower = EnterpriseEnum.VCU_aiTDCChPosBD.getLowerThreshold();
+                        BigDecimal upper = EnterpriseEnum.VCU_aiTDCChPosBD.getUpperThreshold();
+                        return MathUtils.isNotBetween(BigDecimal.valueOf(Double.parseDouble(value)), lower, upper);
+                    }
+                });
+
+        PatternStream<SingleRuleEntiy> patternStream = CEP
+                .pattern(ds.keyBy(SingleRuleEntiy::getVin), pattern);
+
+        DataStream<JSONObject> dataStream = patternStream.select(new PatternSelectFunction<SingleRuleEntiy, JSONObject>() {
+            @Override
+            public JSONObject select(Map<String, List<SingleRuleEntiy>> pattern) {
+                List<SingleRuleEntiy> seconds = pattern.get(EnterpriseEnum.VCU_aiTDCChPosBD.name() + "_begin");
+                JSONObject jsonObject = new JSONObject();
+                SingleRuleEntiy data = seconds.get(0);
+                jsonObject.put("vin", data.getVin());
+                jsonObject.put("message_time", data.getSampleTime());
+                jsonObject.put("target", data.getBMS_BattTempMax());
+                jsonObject.put("code", EnterpriseEnum.BMS_BattTempMax.getCode());
+                jsonObject.put("car_model", G_05);
+                jsonObject.put("loaction_latitude", Dms2dUtils.changeToDu(data.getTEL_LatitudeDeg(),data.getTEL_LatitudeMin(),data.getTEL_LatitudeSec()));
+                jsonObject.put("loaction_Longitude", Dms2dUtils.changeToDu(data.getTEL_LongitudeDeg(),data.getTEL_LongitudeMin(),data.getTEL_LongitudeSec()));
+                return jsonObject;
+            }
+        });
+        return dataStream;
+    }
+
+    private static DataStream<JSONObject> patternVCU_BMS_CoolantInTemp(DataStream<SingleRuleEntiy> ds) {
+        Pattern<SingleRuleEntiy, SingleRuleEntiy> pattern = Pattern.<SingleRuleEntiy>begin(EnterpriseEnum.VCU_BMS_CoolantInTemp.name() + "_begin")
+                .where(new SimpleCondition<SingleRuleEntiy>() {
+                    @Override
+                    public boolean filter(SingleRuleEntiy SingleRuleEntiy) {
+                     String value = SingleRuleEntiy.getVCU_BMS_CoolantInTemp();
+                        if (StringUtils.isBlank(value)) {
+                            return false;
+                        }
+                        BigDecimal lower = EnterpriseEnum.VCU_BMS_CoolantInTemp.getLowerThreshold();
+                        BigDecimal upper = EnterpriseEnum.VCU_BMS_CoolantInTemp.getUpperThreshold();
+                        return MathUtils.isNotBetween(BigDecimal.valueOf(Double.parseDouble(value)), lower, upper);
+                    }
+                });
+
+        PatternStream<SingleRuleEntiy> patternStream = CEP
+                .pattern(ds.keyBy(SingleRuleEntiy::getVin), pattern);
+
+        DataStream<JSONObject> dataStream = patternStream.select(new PatternSelectFunction<SingleRuleEntiy, JSONObject>() {
+            @Override
+            public JSONObject select(Map<String, List<SingleRuleEntiy>> pattern) {
+                List<SingleRuleEntiy> seconds = pattern.get(EnterpriseEnum.VCU_BMS_CoolantInTemp.name() + "_begin");
+                JSONObject jsonObject = new JSONObject();
+                SingleRuleEntiy data = seconds.get(0);
+                jsonObject.put("vin", data.getVin());
+                jsonObject.put("message_time", data.getSampleTime());
+                jsonObject.put("target", data.getBMS_BattTempMax());
+                jsonObject.put("code", EnterpriseEnum.BMS_BattTempMax.getCode());
+                jsonObject.put("car_model", G_05);
+                jsonObject.put("loaction_latitude", Dms2dUtils.changeToDu(data.getTEL_LatitudeDeg(),data.getTEL_LatitudeMin(),data.getTEL_LatitudeSec()));
+                jsonObject.put("loaction_Longitude", Dms2dUtils.changeToDu(data.getTEL_LongitudeDeg(),data.getTEL_LongitudeMin(),data.getTEL_LongitudeSec()));
+                return jsonObject;
+            }
+        });
+        return dataStream;
+    }
+
+    private static DataStream<JSONObject> patternVCU_BMS_CoolantOutTemp(DataStream<SingleRuleEntiy> ds) {
+        Pattern<SingleRuleEntiy, SingleRuleEntiy> pattern = Pattern.<SingleRuleEntiy>begin(EnterpriseEnum.VCU_BMS_CoolantOutTemp.name() + "_begin")
+                .where(new SimpleCondition<SingleRuleEntiy>() {
+                    @Override
+                    public boolean filter(SingleRuleEntiy SingleRuleEntiy) {
+                     String value = SingleRuleEntiy.getVCU_BMS_CoolantOutTemp();
+                        if (StringUtils.isBlank(value)) {
+                            return false;
+                        }
+                        BigDecimal lower = EnterpriseEnum.VCU_BMS_CoolantOutTemp.getLowerThreshold();
+                        BigDecimal upper = EnterpriseEnum.VCU_BMS_CoolantOutTemp.getUpperThreshold();
+                        return MathUtils.isNotBetween(BigDecimal.valueOf(Double.parseDouble(value)), lower, upper);
+                    }
+                });
+
+        PatternStream<SingleRuleEntiy> patternStream = CEP
+                .pattern(ds.keyBy(SingleRuleEntiy::getVin), pattern);
+
+        DataStream<JSONObject> dataStream = patternStream.select(new PatternSelectFunction<SingleRuleEntiy, JSONObject>() {
+            @Override
+            public JSONObject select(Map<String, List<SingleRuleEntiy>> pattern) {
+                List<SingleRuleEntiy> seconds = pattern.get(EnterpriseEnum.VCU_BMS_CoolantOutTemp.name() + "_begin");
+                JSONObject jsonObject = new JSONObject();
+                SingleRuleEntiy data = seconds.get(0);
+                jsonObject.put("vin", data.getVin());
+                jsonObject.put("message_time", data.getSampleTime());
+                jsonObject.put("target", data.getBMS_BattTempMax());
+                jsonObject.put("code", EnterpriseEnum.BMS_BattTempMax.getCode());
+                jsonObject.put("car_model", G_05);
+                jsonObject.put("loaction_latitude", Dms2dUtils.changeToDu(data.getTEL_LatitudeDeg(),data.getTEL_LatitudeMin(),data.getTEL_LatitudeSec()));
+                jsonObject.put("loaction_Longitude", Dms2dUtils.changeToDu(data.getTEL_LongitudeDeg(),data.getTEL_LongitudeMin(),data.getTEL_LongitudeSec()));
+                return jsonObject;
+            }
+        });
+        return dataStream;
+    }
+
+    private static DataStream<JSONObject> patternVCU_DCU_CoolantTemp(DataStream<SingleRuleEntiy> ds) {
+        Pattern<SingleRuleEntiy, SingleRuleEntiy> pattern = Pattern.<SingleRuleEntiy>begin(EnterpriseEnum.VCU_DCU_CoolantTemp.name() + "_begin")
+                .where(new SimpleCondition<SingleRuleEntiy>() {
+                    @Override
+                    public boolean filter(SingleRuleEntiy SingleRuleEntiy) {
+                     String value = SingleRuleEntiy.getVCU_DCU_CoolantTemp();
+                        if (StringUtils.isBlank(value)) {
+                            return false;
+                        }
+                        BigDecimal lower = EnterpriseEnum.VCU_DCU_CoolantTemp.getLowerThreshold();
+                        BigDecimal upper = EnterpriseEnum.VCU_DCU_CoolantTemp.getUpperThreshold();
+                        return MathUtils.isNotBetween(BigDecimal.valueOf(Double.parseDouble(value)), lower, upper);
+                    }
+                });
+
+        PatternStream<SingleRuleEntiy> patternStream = CEP
+                .pattern(ds.keyBy(SingleRuleEntiy::getVin), pattern);
+
+        DataStream<JSONObject> dataStream = patternStream.select(new PatternSelectFunction<SingleRuleEntiy, JSONObject>() {
+            @Override
+            public JSONObject select(Map<String, List<SingleRuleEntiy>> pattern) {
+                List<SingleRuleEntiy> seconds = pattern.get(EnterpriseEnum.VCU_DCU_CoolantTemp.name() + "_begin");
+                JSONObject jsonObject = new JSONObject();
+                SingleRuleEntiy data = seconds.get(0);
+                jsonObject.put("vin", data.getVin());
+                jsonObject.put("message_time", data.getSampleTime());
+                jsonObject.put("target", data.getBMS_BattTempMax());
+                jsonObject.put("code", EnterpriseEnum.BMS_BattTempMax.getCode());
+                jsonObject.put("car_model", G_05);
+                jsonObject.put("loaction_latitude", Dms2dUtils.changeToDu(data.getTEL_LatitudeDeg(),data.getTEL_LatitudeMin(),data.getTEL_LatitudeSec()));
+                jsonObject.put("loaction_Longitude", Dms2dUtils.changeToDu(data.getTEL_LongitudeDeg(),data.getTEL_LongitudeMin(),data.getTEL_LongitudeSec()));
+                return jsonObject;
+            }
+        });
+        return dataStream;
+    }
+
+    private static DataStream<JSONObject> patternVCU_DCU_IdcMax(DataStream<SingleRuleEntiy> ds) {
+        Pattern<SingleRuleEntiy, SingleRuleEntiy> pattern = Pattern.<SingleRuleEntiy>begin(EnterpriseEnum.VCU_DCU_IdcMax.name() + "_begin")
+                .where(new SimpleCondition<SingleRuleEntiy>() {
+                    @Override
+                    public boolean filter(SingleRuleEntiy SingleRuleEntiy) {
+                     String value = SingleRuleEntiy.getVCU_DCU_IdcMax();
+                        if (StringUtils.isBlank(value)) {
+                            return false;
+                        }
+                        BigDecimal lower = EnterpriseEnum.VCU_DCU_IdcMax.getLowerThreshold();
+                        BigDecimal upper = EnterpriseEnum.VCU_DCU_IdcMax.getUpperThreshold();
+                        return MathUtils.isNotBetween(BigDecimal.valueOf(Double.parseDouble(value)), lower, upper);
+                    }
+                });
+
+        PatternStream<SingleRuleEntiy> patternStream = CEP
+                .pattern(ds.keyBy(SingleRuleEntiy::getVin), pattern);
+
+        DataStream<JSONObject> dataStream = patternStream.select(new PatternSelectFunction<SingleRuleEntiy, JSONObject>() {
+            @Override
+            public JSONObject select(Map<String, List<SingleRuleEntiy>> pattern) {
+                List<SingleRuleEntiy> seconds = pattern.get(EnterpriseEnum.VCU_DCU_IdcMax.name() + "_begin");
+                JSONObject jsonObject = new JSONObject();
+                SingleRuleEntiy data = seconds.get(0);
+                jsonObject.put("vin", data.getVin());
+                jsonObject.put("message_time", data.getSampleTime());
+                jsonObject.put("target", data.getBMS_BattTempMax());
+                jsonObject.put("code", EnterpriseEnum.BMS_BattTempMax.getCode());
+                jsonObject.put("car_model", G_05);
+                jsonObject.put("loaction_latitude", Dms2dUtils.changeToDu(data.getTEL_LatitudeDeg(),data.getTEL_LatitudeMin(),data.getTEL_LatitudeSec()));
+                jsonObject.put("loaction_Longitude", Dms2dUtils.changeToDu(data.getTEL_LongitudeDeg(),data.getTEL_LongitudeMin(),data.getTEL_LongitudeSec()));
+                return jsonObject;
+            }
+        });
+        return dataStream;
+    }
+
+    private static DataStream<JSONObject> patternVCU_pAtmospheric(DataStream<SingleRuleEntiy> ds) {
+        Pattern<SingleRuleEntiy, SingleRuleEntiy> pattern = Pattern.<SingleRuleEntiy>begin(EnterpriseEnum.VCU_pAtmospheric.name() + "_begin")
+                .where(new SimpleCondition<SingleRuleEntiy>() {
+                    @Override
+                    public boolean filter(SingleRuleEntiy SingleRuleEntiy) {
+                     String value = SingleRuleEntiy.getVCU_pAtmospheric();
+                        if (StringUtils.isBlank(value)) {
+                            return false;
+                        }
+                        BigDecimal lower = EnterpriseEnum.VCU_pAtmospheric.getLowerThreshold();
+                        BigDecimal upper = EnterpriseEnum.VCU_pAtmospheric.getUpperThreshold();
+                        return MathUtils.isNotBetween(BigDecimal.valueOf(Double.parseDouble(value)), lower, upper);
+                    }
+                });
+
+        PatternStream<SingleRuleEntiy> patternStream = CEP
+                .pattern(ds.keyBy(SingleRuleEntiy::getVin), pattern);
+
+        DataStream<JSONObject> dataStream = patternStream.select(new PatternSelectFunction<SingleRuleEntiy, JSONObject>() {
+            @Override
+            public JSONObject select(Map<String, List<SingleRuleEntiy>> pattern) {
+                List<SingleRuleEntiy> seconds = pattern.get(EnterpriseEnum.VCU_pAtmospheric.name() + "_begin");
+                JSONObject jsonObject = new JSONObject();
+                SingleRuleEntiy data = seconds.get(0);
+                jsonObject.put("vin", data.getVin());
+                jsonObject.put("message_time", data.getSampleTime());
+                jsonObject.put("target", data.getBMS_BattTempMax());
+                jsonObject.put("code", EnterpriseEnum.BMS_BattTempMax.getCode());
+                jsonObject.put("car_model", G_05);
+                jsonObject.put("loaction_latitude", Dms2dUtils.changeToDu(data.getTEL_LatitudeDeg(),data.getTEL_LatitudeMin(),data.getTEL_LatitudeSec()));
+                jsonObject.put("loaction_Longitude", Dms2dUtils.changeToDu(data.getTEL_LongitudeDeg(),data.getTEL_LongitudeMin(),data.getTEL_LongitudeSec()));
+                return jsonObject;
+            }
+        });
+        return dataStream;
+    }
+
+    private static DataStream<JSONObject> patternBCS_VehLaltrlAccelOffset(DataStream<SingleRuleEntiy> ds) {
+        Pattern<SingleRuleEntiy, SingleRuleEntiy> pattern = Pattern.<SingleRuleEntiy>begin(EnterpriseEnum.BCS_VehLaltrlAccelOffset.name() + "_begin")
+                .where(new SimpleCondition<SingleRuleEntiy>() {
+                    @Override
+                    public boolean filter(SingleRuleEntiy SingleRuleEntiy) {
+                     String value = SingleRuleEntiy.getBCS_VehLaltrlAccelOffset();
+                        if (StringUtils.isBlank(value)) {
+                            return false;
+                        }
+                        BigDecimal lower = EnterpriseEnum.BCS_VehLaltrlAccelOffset.getLowerThreshold();
+                        BigDecimal upper = EnterpriseEnum.BCS_VehLaltrlAccelOffset.getUpperThreshold();
+                        return MathUtils.isNotBetween(BigDecimal.valueOf(Double.parseDouble(value)), lower, upper);
+                    }
+                });
+
+        PatternStream<SingleRuleEntiy> patternStream = CEP
+                .pattern(ds.keyBy(SingleRuleEntiy::getVin), pattern);
+
+        DataStream<JSONObject> dataStream = patternStream.select(new PatternSelectFunction<SingleRuleEntiy, JSONObject>() {
+            @Override
+            public JSONObject select(Map<String, List<SingleRuleEntiy>> pattern) {
+                List<SingleRuleEntiy> seconds = pattern.get(EnterpriseEnum.BCS_VehLaltrlAccelOffset.name() + "_begin");
+                JSONObject jsonObject = new JSONObject();
+                SingleRuleEntiy data = seconds.get(0);
+                jsonObject.put("vin", data.getVin());
+                jsonObject.put("message_time", data.getSampleTime());
+                jsonObject.put("target", data.getBMS_BattTempMax());
+                jsonObject.put("code", EnterpriseEnum.BMS_BattTempMax.getCode());
+                jsonObject.put("car_model", G_05);
+                jsonObject.put("loaction_latitude", Dms2dUtils.changeToDu(data.getTEL_LatitudeDeg(),data.getTEL_LatitudeMin(),data.getTEL_LatitudeSec()));
+                jsonObject.put("loaction_Longitude", Dms2dUtils.changeToDu(data.getTEL_LongitudeDeg(),data.getTEL_LongitudeMin(),data.getTEL_LongitudeSec()));
+                return jsonObject;
+            }
+        });
+        return dataStream;
+    }
+
